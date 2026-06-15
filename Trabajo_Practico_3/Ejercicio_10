@@ -1,0 +1,101 @@
+from collections import deque
+
+
+
+cola_canciones = deque()
+
+
+cola_canciones.append({
+    "nombre": "Blinding Lights",
+    "artista": "The Weeknd",
+    "duracion": 200,
+    "reproducciones": 2000000
+})
+
+cola_canciones.append({
+    "nombre": "Numb",
+    "artista": "Linkin Park",
+    "duracion": 185,
+    "reproducciones": 1500000
+})
+
+cola_canciones.append({
+    "nombre": "Do I Wanna Know?",
+    "artista": "Arctic Monkeys",
+    "duracion": 272,
+    "reproducciones": 1200000
+})
+
+
+
+def cancion_mas_larga(cola):
+    copia = cola.copy()
+    larga = None
+
+    while copia:
+        cancion = copia.popleft()
+
+        if larga is None or cancion["duracion"] > larga["duracion"]:
+            larga = cancion
+
+    print("\nCanción más larga:")
+    print(larga["nombre"], "-", larga["artista"],
+          "-", larga["duracion"], "segundos")
+
+
+def top_canciones(cola, cantidad):
+    lista = []
+    copia = cola.copy()
+
+    while copia:
+        lista.append(copia.popleft())
+
+    lista.sort(key=lambda x: x["reproducciones"], reverse=True)
+
+    print("\nTOP", cantidad, "canciones más escuchadas:")
+
+    for i, cancion in enumerate(lista[:cantidad], 1):
+        print(i, "-", cancion["nombre"],
+              "-", cancion["artista"],
+              "-", cancion["reproducciones"], "reproducciones")
+
+
+def canciones_arctic_monkeys(cola):
+    copia = cola.copy()
+
+    print("\nCanciones de Arctic Monkeys:")
+
+    while copia:
+        cancion = copia.popleft()
+
+        if cancion["artista"] == "Arctic Monkeys":
+            print("-", cancion["nombre"])
+
+
+
+def artistas_una_palabra(cola):
+    copia = cola.copy()
+    artistas = []
+
+    while copia:
+        cancion = copia.popleft()
+
+        if len(cancion["artista"].split()) == 1:
+            artistas.append(cancion["artista"])
+
+    print("\nArtistas de una sola palabra:")
+
+    for artista in artistas:
+        print("-", artista)
+
+
+
+cancion_mas_larga(cola_canciones)
+
+top_canciones(cola_canciones, 5)
+top_canciones(cola_canciones, 10)
+top_canciones(cola_canciones, 40)
+
+canciones_arctic_monkeys(cola_canciones)
+
+artistas_una_palabra(cola_canciones)
