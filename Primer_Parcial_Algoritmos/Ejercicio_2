@@ -1,0 +1,175 @@
+from super_heroes_data import superheroes
+
+
+
+print("--- PERSONAJES ORDENADOS POR NOMBRE ---")
+
+orden_nombre = sorted(superheroes, key=lambda x: x["name"])
+
+for personaje in orden_nombre:
+    print(personaje["name"])
+
+
+
+print("--- POSICIONES ---")
+
+for posicion, personaje in enumerate(superheroes):
+
+    if personaje["name"] == "The Thing":
+        print("The Thing esta en la posicion:", posicion)
+
+    if personaje["name"] == "Rocket Raccoon":
+        print("Rocket Raccoon esta en la posicion:", posicion)
+
+
+
+
+
+print("--- VILLANOS ---")
+
+for personaje in superheroes:
+
+    if personaje["is_villain"] == True:
+        print(personaje["name"])
+
+
+
+a
+
+print("--- VILLANOS ANTES DE 1980 ---")
+
+cola_villanos = []
+
+
+for personaje in superheroes:
+
+    if personaje["is_villain"] == True:
+
+        cola_villanos.append(personaje)
+
+
+
+while len(cola_villanos) > 0:
+
+    villano = cola_villanos.pop(0)
+
+    if villano["first_appearance"] < 1980:
+
+        print(villano["name"], villano["first_appearance"])
+
+
+
+
+
+
+print("--- SUPERHEROES BL, G, MY Y W ---")
+
+
+for personaje in superheroes:
+
+    nombre = personaje["name"]
+
+    if (nombre.startswith("Bl") or
+        nombre.startswith("G") or
+        nombre.startswith("My") or
+        nombre.startswith("W")):
+
+        if personaje["is_villain"] == False:
+
+            print(nombre)
+
+
+
+
+l
+
+print("--- ORDENADOS POR NOMBRE REAL ---")
+
+
+orden_real = sorted(
+    superheroes,
+    key=lambda x: x["real_name"]
+)
+
+
+for personaje in orden_real:
+
+    print(personaje["real_name"], personaje["name"])
+
+
+
+
+print("--- SUPERHEROES ORDENADOS POR FECHA ---")
+
+
+orden_fecha = sorted(
+    superheroes,
+    key=lambda x: x["first_appearance"]
+)
+
+
+for personaje in orden_fecha:
+
+    if personaje["is_villain"] == False:
+
+        print(personaje["name"], personaje["first_appearance"])
+
+
+
+
+
+print("--- MODIFICAR ANT MAN ---")
+
+
+for personaje in superheroes:
+
+    if personaje["name"] == "Ant Man":
+
+        personaje["real_name"] = "Scott Lang"
+
+        print(personaje)
+
+
+
+
+
+
+print("--- BIOGRAFIAS CON TIME-TRAVELING O SUIT ---")
+
+
+for personaje in superheroes:
+
+    bio = personaje["short_bio"].lower()
+
+    if "time-traveling" in bio or "suit" in bio:
+
+        print(personaje["name"])
+
+
+
+
+
+
+print("--- ELIMINAR ELECTRO Y BARON ZEMO ---")
+
+
+eliminados = []
+
+
+for personaje in superheroes[:]:
+
+    if personaje["name"] == "Electro" or personaje["name"] == "Baron Zemo":
+
+        eliminados.append(personaje)
+
+        superheroes.remove(personaje)
+
+
+
+for personaje in eliminados:
+
+    print("Nombre:", personaje["name"])
+    print("Alias:", personaje["alias"])
+    print("Nombre real:", personaje["real_name"])
+    print("Biografia:", personaje["short_bio"])
+    print("Primera aparicion:", personaje["first_appearance"])
