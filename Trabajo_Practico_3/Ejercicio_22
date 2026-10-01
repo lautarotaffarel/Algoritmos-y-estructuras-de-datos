@@ -1,0 +1,148 @@
+# Lista de Jedi
+jedi = [
+    {
+        "nombre": "Luke Skywalker",
+        "maestros": ["Yoda", "Obi-Wan Kenobi"],
+        "sables": ["verde"],
+        "especie": "humana"
+    },
+    {
+        "nombre": "Yoda",
+        "maestros": [],
+        "sables": ["verde"],
+        "especie": "desconocida"
+    },
+    {
+        "nombre": "Ahsoka Tano",
+        "maestros": ["Anakin Skywalker"],
+        "sables": ["verde", "blanco"],
+        "especie": "twi'lek"
+    },
+    {
+        "nombre": "Kit Fisto",
+        "maestros": ["Yoda"],
+        "sables": ["verde"],
+        "especie": "nautolano"
+    },
+    {
+        "nombre": "Mace Windu",
+        "maestros": ["Yoda"],
+        "sables": ["violeta"],
+        "especie": "humana"
+    },
+    {
+        "nombre": "Qui-Gon Jinn",
+        "maestros": ["Dooku"],
+        "sables": ["verde"],
+        "especie": "humana"
+    },
+    {
+        "nombre": "Anakin Skywalker",
+        "maestros": ["Obi-Wan Kenobi"],
+        "sables": ["azul", "rojo"],
+        "especie": "humana"
+    }
+]
+
+
+
+def ordenar_jedi(lista):
+    print("\nJedi ordenados por nombre:")
+    orden_nombre = sorted(lista, key=lambda x: x["nombre"])
+
+    for j in orden_nombre:
+        print(j["nombre"])
+
+    print("\nJedi ordenados por especie:")
+    orden_especie = sorted(lista, key=lambda x: x["especie"])
+
+    for j in orden_especie:
+        print(j["nombre"], "-", j["especie"])
+
+
+def informacion_jedi(lista):
+    print("\nInformación solicitada:")
+
+    for j in lista:
+        if j["nombre"] == "Ahsoka Tano" or j["nombre"] == "Kit Fisto":
+            print(j)
+
+
+
+def aprendices(lista, maestro):
+    print("\nPadawans de", maestro, ":")
+
+    for j in lista:
+        if maestro in j["maestros"]:
+            print("-", j["nombre"])
+
+
+
+def humanos_twilek(lista):
+    print("\nJedi humanos y twi'lek:")
+
+    for j in lista:
+        if j["especie"] == "humana" or j["especie"] == "twi'lek":
+            print("-", j["nombre"])
+
+
+
+def empiezan_A(lista):
+    print("\nJedi que comienzan con A:")
+
+    for j in lista:
+        if j["nombre"].startswith("A"):
+            print("-", j["nombre"])
+
+
+
+def varios_sables(lista):
+    print("\nJedi con más de un color de sable:")
+
+    for j in lista:
+        if len(j["sables"]) > 1:
+            print("-", j["nombre"])
+
+
+
+def sable_amarillo_violeta(lista):
+    print("\nJedi con sable amarillo o violeta:")
+
+    for j in lista:
+        if "amarillo" in j["sables"] or "violeta" in j["sables"]:
+            print("-", j["nombre"])
+
+
+
+def padawans_maestro(lista, maestro):
+    print("\nPadawans de", maestro, ":")
+
+    tiene = False
+
+    for j in lista:
+        if maestro in j["maestros"]:
+            print("-", j["nombre"])
+            tiene = True
+
+    if not tiene:
+        print("No posee padawans registrados")
+
+
+
+ordenar_jedi(jedi)
+
+informacion_jedi(jedi)
+
+aprendices(jedi, "Yoda")
+aprendices(jedi, "Luke Skywalker")
+
+humanos_twilek(jedi)
+
+empiezan_A(jedi)
+
+varios_sables(jedi)
+
+sable_amarillo_violeta(jedi)
+
+padawans_maestro(jedi, "Qui-Gon Jinn")
+padawans_maestro(jedi, "Mace Windu")

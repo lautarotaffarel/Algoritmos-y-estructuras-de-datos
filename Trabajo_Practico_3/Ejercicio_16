@@ -1,0 +1,155 @@
+from collections import deque
+from datetime import datetime
+
+
+# Crear cola de tareas
+cola_tareas = deque()
+
+
+
+cola_tareas.append({
+    "nombre": "Diseño de interfaz",
+    "costo": 5000,
+    "tiempo": 10,
+    "inicio": "01/06/2026",
+    "fin_estimado": "10/06/2026",
+    "fin_real": "09/06/2026",
+    "persona": "Juan"
+})
+
+cola_tareas.append({
+    "nombre": "Base de datos",
+    "costo": 8000,
+    "tiempo": 15,
+    "inicio": "05/06/2026",
+    "fin_estimado": "20/06/2026",
+    "fin_real": "25/06/2026",
+    "persona": "Maria"
+})
+
+cola_tareas.append({
+    "nombre": "Programación backend",
+    "costo": 12000,
+    "tiempo": 20,
+    "inicio": "15/06/2026",
+    "fin_estimado": "05/07/2026",
+    "fin_real": "",
+    "persona": "Juan"
+})
+
+
+
+def tiempo_promedio(cola):
+    copia = cola.copy()
+    suma = 0
+    cantidad = 0
+
+    while copia:
+        tarea = copia.popleft()
+        suma += tarea["tiempo"]
+        cantidad += 1
+
+    print("\nTiempo promedio de tareas:",
+          suma / cantidad, "días")
+
+
+
+def costo_total(cola):
+    copia = cola.copy()
+    total = 0
+
+    while copia:
+        tarea = copia.popleft()
+        total += tarea["costo"]
+
+    print("\nCosto total del proyecto: $", total)
+
+
+
+def tareas_persona(cola, persona):
+    copia = cola.copy()
+
+    print("\nTareas realizadas por", persona, ":")
+
+    while copia:
+        tarea = copia.popleft()
+
+        if tarea["persona"].lower() == persona.lower():
+            print("-", tarea["nombre"])
+
+
+
+def tareas_entre_fechas(cola, fecha1, fecha2):
+    copia = cola.copy()
+
+    fecha1 = datetime.strptime(fecha1, "%d/%m/%Y")
+    fecha2 = datetime.strptime(fecha2, "%d/%m/%Y")
+
+    print("\nTareas entre fechas:")
+
+    while copia:
+        tarea = copia.popleft()
+
+        inicio = datetime.strptime(tarea["inicio"], "%d/%m/%Y")
+
+        if fecha1 <= inicio <= fecha2:
+            print("-", tarea["nombre"])
+
+
+
+def estado_tareas(cola):
+    copia = cola.copy()
+
+    print("\nTareas finalizadas en tiempo:")
+    while copia:
+        tarea = copia.popleft()
+
+        if tarea["fin_real"] != "":
+            estimada = datetime.strptime(tarea["fin_estimado"], "%d/%m/%Y")
+            real = datetime.strptime(tarea["fin_real"], "%d/%m/%Y")
+
+            if real <= estimada:
+                print("-", tarea["nombre"])
+
+
+    copia = cola.copy()
+
+    print("\nTareas finalizadas fuera de tiempo:")
+    while copia:
+        tarea = copia.popleft()
+
+        if tarea["fin_real"] != "":
+            estimada = datetime.strptime(tarea["fin_estimado"], "%d/%m/%Y")
+            real = datetime.strptime(tarea["fin_real"], "%d/%m/%Y")
+
+            if real > estimada:
+                print("-", tarea["nombre"])
+
+
+
+def tareas_pendientes(cola, persona):
+    copia = cola.copy()
+    contador = 0
+
+    while copia:
+        tarea = copia.popleft()
+
+        if tarea["persona"].lower() == persona.lower():
+            if tarea["fin_real"] == "":
+                contador += 1
+
+    print("\nTareas pendientes de", persona, ":", contador)
+
+
+# Programa principal
+tiempo_promedio(cola_tareas)
+
+costo_total(cola_tareas)
+
+tareas_persona(cola_tareas, "Juan")
+
+tareas_entre_fechas(cola_tareas, "01/06/2026", "15/06/2026")
+
+estado_tareas(cola_tareas)
+
+tareas_pendientes(cola_tareas, "Juan")
