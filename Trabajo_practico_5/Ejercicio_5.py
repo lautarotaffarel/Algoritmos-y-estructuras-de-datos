@@ -1,10 +1,10 @@
-
+# Definición de la estructura del nodo y del personaje
 class Personaje:
     def __init__(self, nombre, es_heroe):
         self.nombre = nombre
         self.es_heroe = es_heroe  # True: Héroe, False: Villano
 
-
+    # Sobrecarga de operadores para ordenar alfabéticamente en el ABB por nombre
     def __lt__(self, otro):
         return self.nombre < otro.nombre
 
@@ -27,7 +27,7 @@ class nodoArbol(object):
         self.der = None
 
 
-
+# a. Inserción en el Árbol Binario de Búsqueda (ABB)
 def insertar_nodo(raiz, dato):
     """Inserta un dato en el árbol manteniendo el orden alfabético por nombre[cite: 142]."""
     if raiz is None:
@@ -39,7 +39,7 @@ def insertar_nodo(raiz, dato):
     return raiz
 
 
-
+# b. Listar los villanos ordenados alfabéticamente (Inorden filtrado)
 def listar_villanos(raiz):
     if raiz is not None:
         listar_villanos(raiz.izq)
@@ -48,7 +48,7 @@ def listar_villanos(raiz):
         listar_villanos(raiz.der)
 
 
-
+# c. Mostrar superhéroes que empiezan con 'C'
 def heroes_empiezan_con_c(raiz):
     if raiz is not None:
         heroes_empiezan_con_c(raiz.izq)
@@ -57,6 +57,7 @@ def heroes_empiezan_con_c(raiz):
         heroes_empiezan_con_c(raiz.der)
 
 
+# d. Determinar cuántos superhéroes hay en el árbol
 def contar_superheroes(raiz):
     if raiz is None:
         return 0
@@ -64,6 +65,7 @@ def contar_superheroes(raiz):
     return contador + contar_superheroes(raiz.izq) + contar_superheroes(raiz.der)
 
 
+# e. Búsqueda por proximidad y modificación de nombre (ej. "Dr. Strange" o mal escrito)
 def busqueda_proximidad(raiz, termino):
     """Busca nodos cuyo nombre contenga el término de proximidad (búsqueda parcial)."""
     if raiz is not None:
@@ -76,6 +78,7 @@ def busqueda_proximidad(raiz, termino):
         busqueda_proximidad(raiz.der, termino)
 
 
+# f. Listar los superhéroes ordenados de manera descendente (Inorden inverso: Der -> Raíz -> Izq)
 def listar_heroes_descendente(raiz):
     if raiz is not None:
         listar_heroes_descendente(raiz.der)
@@ -84,6 +87,7 @@ def listar_heroes_descendente(raiz):
         listar_heroes_descendente(raiz.izq)
 
 
+# g. Generar un bosque (dos árboles separados: uno de héroes y otro de villanos)
 def generar_bosque(raiz, arbol_heroes, arbol_villanos):
     if raiz is not None:
         arbol_heroes, arbol_villanos = generar_bosque(raiz.izq, arbol_heroes, arbol_villanos)
@@ -95,20 +99,19 @@ def generar_bosque(raiz, arbol_heroes, arbol_villanos):
     return arbol_heroes, arbol_villanos
 
 
+# g.I. Determinar cuántos nodos tiene cada árbol
 def contar_nodos(raiz):
     if raiz is None:
         return 0
     return 1 + contar_nodos(raiz.izq) + contar_nodos(raiz.der)
 
 
+# g.II. Barrido ordenado alfabéticamente de cada árbol (Inorden)
 def barrido_alfabetico(raiz):
     if raiz is not None:
         barrido_alfabetico(raiz.izq)
         print(raiz.info)
         barrido_alfabetico(raiz.der)
-
-
-
 
         # Inicialización del árbol MCU
 arbol_mcu = None

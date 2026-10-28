@@ -152,8 +152,6 @@ def listar_capturadas_por(raiz, heroe):
             print(f"• {raiz.info.nombre}")
         listar_capturadas_por(raiz.der, heroe)
 
-
-
         # Inicializar el árbol
 arbol_mitologia = None
 
